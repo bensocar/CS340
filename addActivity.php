@@ -6,7 +6,7 @@
 ?>
 <html>
 	<head>
-		<title>Home Page</title>
+		<title>Add Animal Activity Record</title>
 		<link rel="stylesheet" href="list.css">
 		<script type = "text/javascript"  src = "list.js" > </script> 
 	</head>
