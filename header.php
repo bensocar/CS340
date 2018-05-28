@@ -1,4 +1,5 @@
 <header>
+<a href="index.php"><img src="logo.png" id="logo"></img></a>
   <?php
   session_start();
   if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
@@ -8,6 +9,7 @@
     echo "Welcome to the Group 11 Project Webpage!";
   }
   ?>
+  
 </header>
 <nav>
   <ul>
