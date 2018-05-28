@@ -7,8 +7,8 @@
 <html>
 	<head>
 		<title>Search Animals</title>
-		<link rel="stylesheet" href="listAnimals.css">
-		<script type = "text/javascript"  src = "listAnimals.js" > </script> 
+		<link rel="stylesheet" href="list.css">
+		<script type = "text/javascript"  src = "list.js" > </script> 
 	</head>
 <body>
 <?php
