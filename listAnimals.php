@@ -14,6 +14,7 @@
 <?php
 	include 'connectvars.php';
 	include 'header.php';
+    echo "<h1>Search for Animals</h1> ";
 $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if (!$conn) {
 		die('Could not connect: ' . mysql_error());
@@ -30,7 +31,7 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	}
     $fields_num = mysqli_num_fields($resultIn);
     if(mysqli_num_rows($resultIn)==0){
-        echo "<p style=\"color:crimson;\"> No results for search $searchVal</p>";
+        echo "<p style=\"color:crimson;\"> No results for search \"$searchVal\"</p>";
     }
     else{
 	//echo "<h1>Animal:</h1>";
