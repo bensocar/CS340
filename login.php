@@ -38,6 +38,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	else{
 		$msg = "Thank you for logging in, $userRow[2]!";
 		$_SESSION['loggedin'] = $userRow[0];
+		$_SESSION['firstName'] = $userRow[2];
+		echo "<script>location.href='account.php'</script>";
 	}
 }
 

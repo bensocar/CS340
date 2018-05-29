@@ -10,7 +10,8 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
 		"Search Activities" => "listActivities.php",
 		"Log Medical" => "addMedical.php",
 		"Search Medical Records" => "listMedical.php",
-		"Profile" => "account.php");
+		"Profile" => "account.php",
+		"Logout" => "logout.php");
 }
 else{
 	$content = array(
