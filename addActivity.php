@@ -14,6 +14,7 @@
 <?php
 	include 'connectvars.php';
 	include 'header.php';
+    echo "<h1>Add a New Animal Activity</h1> ";
 $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if (!$conn) {
 		die('Could not connect: ' . mysql_error());
@@ -51,16 +52,16 @@ mysqli_close($conn);
 	<legend>Activity Info:</legend>
     <p>
         <label for="animalID">Animal ID:</label>
-        <input type="number" min=1 max = 99999 class="required" name="animalID" id="animalID">
+        <input type="number" min=1 max = 99999 class="required" name="animalID" id="animalID" required>
     </p>
     <p>
         <label for="userName">User Name:</label>
-        <input type="text" class="required" name="userName" id="userName">
+        <input type="text" class="required" name="userName" id="userName" required>
     </p>
 
     <p>
         <label for="activityCode">Activity Code:</label>
-        <input type="text" class="required" name="activityCode" id="activityCode">
+        <input type="text" class="required" name="activityCode" id="activityCode" required>
         </p>
         <p>
         <label for="activityDate">Date:</label>
@@ -70,7 +71,7 @@ title="Enter a date in this format YYYY-MM-DD"/>
     </p>
     <p>
         <label for="activityNotes">Activity Notes:</label>
-        <textarea class="required" name="activityNotes" id="activityNotes" maxlength="1000" rows="4" cols="50"></textarea>
+        <textarea class="required" name="activityNotes" id="activityNotes" maxlength="1000" rows="4" cols="50" required></textarea>
     </p>
 </fieldset>
 
