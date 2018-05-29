@@ -17,6 +17,7 @@ else{
 		"Home" => "index.php",
 		"Search Animals" => "listAnimals.php",
 		"Search Activities" => "listActivities.php",
-		"Search Medical Records" => "listMedical.php");
+		"Search Medical Records" => "listMedical.php",
+		"Login" => "login.php");
 }
 ?>
