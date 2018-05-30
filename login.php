@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+session_unset();
 session_start();
 $currentpage = 'Login';
 include 'pages.php';
@@ -39,6 +40,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$msg = "Thank you for logging in, $userRow[2]!";
 		$_SESSION['loggedin'] = $userRow[0];
 		$_SESSION['firstName'] = $userRow[2];
+		$_SESSION['lastName'] = $userRow[3];
+		$_SESSION['userType'] = $userRow[4];
+		$_SESSION['phoneNumber'] = $userRow[5];
+
 		echo "<script>location.href='account.php'</script>";
 	}
 }
