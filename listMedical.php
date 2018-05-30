@@ -24,8 +24,7 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$searchVal = mysqli_real_escape_string($conn, $_POST['searchVal']);
 		$key = mysqli_real_escape_string($conn, $_POST['searchKey']);
 
-// See if pid is already in the table
-		$queryIn = "SELECT * FROM MedicalRecord WHERE $key LIKE '%$searchVal%'";
+		$queryIn = "SELECT m.recordID as 'Record ID', m.medicalNotes as Notes, m.medicalCode as Code, c.medicalDesc as Description, m.animalID as 'Animal ID', m.userName as Username, m.medicalDate as Date FROM MedicalRecord as m, MedicalCode as c WHERE $key LIKE '%$searchVal%' AND m.medicalCode = c.medicalCode";
 		$resultIn = mysqli_query($conn, $queryIn);
 		if (!$resultIn) {
 		die("Query to show fields from table failed");

@@ -23,8 +23,7 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$searchVal = mysqli_real_escape_string($conn, $_POST['searchVal']);
 		$key = mysqli_real_escape_string($conn, $_POST['searchKey']);
 
-// See if pid is already in the table
-		$queryIn = "SELECT * FROM Animals WHERE $key LIKE '%$searchVal%'";
+		$queryIn = "SELECT animalID as ID, animalName as Name, sex as Sex, birthdate as DOB, breed as Breed, color as Color FROM Animals WHERE $key LIKE '%$searchVal%'";
 		$resultIn = mysqli_query($conn, $queryIn);
 		if (!$resultIn) {
 		die("Query to show fields from table failed");
