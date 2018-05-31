@@ -59,10 +59,16 @@ mysqli_close($conn);
         <input type="text" class="required" name="userName" id="userName" required>
     </p>
 
-    <p>
-        <label for="medicalCode">Medical Code:</label>
-        <input type="text" class="required" name="medicalCode" id="medicalCode" required>
-        </p>
+    <p>    
+        <label>Medical Code:</label>
+        <select name="medicalCode" id="medicalCode">
+            <option value="1">1: Exam</option>
+            <option value="2">2: Immunization</option>
+            <option value="3">3: Treatment</option>
+            <option value="4">4: Surgery</option>
+            <option value="5">5: Euthanize</option>
+        </select>
+      </p>
         <p>
         <label for="medicalDate">Date:</label>
         <input type="text" name="medicalDate" placeholder="YYYY-MM-DD" required 
