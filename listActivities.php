@@ -1,9 +1,9 @@
-<!DOCTYPE html>
 <?php
   session_start();
   $currentpage = "Search Activities";
   include "pages.php";
 ?>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Search Activities</title>

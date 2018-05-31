@@ -3,6 +3,7 @@ session_start();
 $currentpage = "Logout";
 include "pages.php";
 ?>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Login</title>

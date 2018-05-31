@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <?php
 session_unset();
 session_start();
 $currentpage = 'Login';
 include 'pages.php';
 ?>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Login</title>

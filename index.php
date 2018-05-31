@@ -1,9 +1,9 @@
-<!DOCTYPE html>
 <?php
   session_start();
   $currentpage = "Home";
   include "pages.php";
 ?>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Home Page</title>
