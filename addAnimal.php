@@ -28,6 +28,9 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         $breed = mysqli_real_escape_string($conn, $_POST['breed']);
 		$color = mysqli_real_escape_string($conn, $_POST['color']);
         $birthdate = mysqli_real_escape_string($conn, $_POST['birthdate']);
+        $userName = mysqli_real_escape_string($conn, $_POST['userName']);
+        $activityNotes = mysqli_real_escape_string($conn, $_POST['activityNotes']);
+        $activityDate = mysqli_real_escape_string($conn, $_POST['activityDate']);
 	
 // See if pid is already in the table
 		
@@ -38,8 +41,14 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 			} else{
 				echo "ERROR: Could not able to execute $query. " . mysqli_error($conn);
 			}
-		
-
+            
+            $queryIn = "SELECT animalID FROM Animals WHERE animalName='$animalName' and sex='$sex' and birthdate='$birthdate'";
+		$resultIn = mysqli_query($conn, $queryIn);
+		if (!$resultIn) {
+		die("Query to show fields from table failed");
+	}
+    $animalRow = mysqli_fetch_row($resultIn);
+    $result = mysqli_query($conn, "CALL animalIntake('$animalRow[0]','$userName', '$activityNotes')") or die("Query fail: " . mysqli_error());
 }
 // close connection
 mysqli_close($conn);
@@ -55,15 +64,25 @@ mysqli_close($conn);
         <label for="animalName">Animal Name:</label>
         <input type="text" maxlength="30" class="required" name="animalName" id="animalName" required>
     </p>
-    <p>
-        <label for="sex">Sex:</label>
-        <input type="text" maxlength="7" class="required" name="sex" id="sex" required>
-    </p>
+    <p>    
+        <label>Sex:</label>
+        <select name="sex" id="sex">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+      </p>
 
-    <p>
-        <label for="type">Animal Type:</label>
-        <input type="text" class="required" name="type" id="type" maxlength="20" required>
-        </p>
+    <p>    
+        <label>Animal Type:</label>
+        <select name="type" id="type">
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+            <option value="Horse">Horse</option>
+            <option value="Rabbit">Rabbit</option>
+            <option value="Bird">Bird</option>
+            <option value="Reptile">Reptile</option>
+        </select>
+      </p>
         <p>
         <label for="breed">Breed:</label>
         <input type="text" maxlength="30" class="required" name="breed" id="breed" required>
@@ -78,6 +97,14 @@ mysqli_close($conn);
         <input type="text" name="birthdate" placeholder="YYYY-MM-DD" required 
 pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" 
 title="Enter a date in this format YYYY-MM-DD"/>
+    </p>
+    <p>
+        <label for="userName">User Name:</label>
+        <input type="text" class="required" name="userName" id="userName" required>
+    </p>
+    <p>
+        <label for="activityNotes">Intake Notes:</label>
+        <textarea class="required" name="activityNotes" id="activityNotes" maxlength="1000" rows="4" cols="50" required></textarea>
     </p>
 </fieldset>
 
