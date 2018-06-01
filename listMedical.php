@@ -8,7 +8,7 @@
 	<head>
 		<title>Search Medical Records</title>
 		<link rel="stylesheet" href="list.css">
-		<script type = "text/javascript"  src = "list.js" > </script> 
+		<script type = "text/javascript"  src = "list.js" > </script>
 	</head>
 <body>
 
@@ -36,32 +36,33 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     else{
 	//echo "<h1>Animal:</h1>";
 	echo "<table id='t01' border='1'><tr>";
-	
+
 // printing table headers
-	for($i=0; $i<$fields_num; $i++) {	
-		$field = mysqli_fetch_field($resultIn);	
+	for($i=0; $i<$fields_num; $i++) {
+		$field = mysqli_fetch_field($resultIn);
 		echo "<td><b>$field->name</b></td>";
 	}
 	echo "</tr>\n";
-	while($row = mysqli_fetch_row($resultIn)) {	
-		echo "<tr>";	
+	while($row = mysqli_fetch_row($resultIn)) {
+    $animalID = $row[4];
+		echo "<tr>";
 		// $row is array... foreach( .. ) puts every element
-		// of $row to $cell variable	
-		foreach($row as $cell)		
-			echo "<td>$cell</td>";	
+		// of $row to $cell variable
+		foreach($row as $cell)
+			echo "<td><a href=animalDetails.php?id=" . $animalID . ">$cell</a></td>";
 		echo "</tr>\n";
 	}
-	}	
-		
-			
+	}
+
+
 
 }
 mysqli_free_result($resultIn);
 // close connection
 mysqli_close($conn);
 ?>
-       
-    <?php echo $msg; ?> 
+
+    <?php echo $msg; ?>
 
 <form method="post" id="addForm">
 <fieldset>
