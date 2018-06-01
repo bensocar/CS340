@@ -5,12 +5,12 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
 	$content = array(
 		"Home" => "index.php",
 		"Add Animal" => "addAnimal.php",
-		"Search Animals" => "listAnimals.php",
-		"Log Activity" => "addActivity.php",
-		"Search Activities" => "listActivities.php",
-		"Log Medical" => "addMedical.php",
-		"Search Medical Records" => "listMedical.php",
-		"Profile" => "account.php",
+        "Log Activity" => "addActivity.php",
+        "Log Medical" => "addMedical.php",
+        "Profile" => "account.php",
+		"Search Animals" => "listAnimals.php",		
+		"Search Activities" => "listActivities.php",		
+		"Search Medical Records" => "listMedical.php",		
 		"Logout" => "logout.php");
 }
 else{
