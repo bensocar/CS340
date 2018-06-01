@@ -14,17 +14,17 @@
 <?php
 	include 'header.php';
 ?>
-<main>
+<main class="index">
 <div>
 <h1>Weclome to the Animal Shelter Database Homepage</h1>
 </div>
 <article>
 <div><p><h3>About Us</h3></p>
 </div>
-<div><p><strong>Our mission:</strong> To provide temporary shelter to stray, abandoned, and surrendered animals 
+<div><p><strong>Our mission:</strong> </p><p>To provide temporary shelter to stray, abandoned, and surrendered animals 
 for the purpose of finding permanent suitable new homes. To provide assistance and 
 financial aid to prevent overpopulation through spaying and neutering programs.</p>
-<p><strong>Our History:</strong> This shelter was started in 1997 by the founders: Carl Benson, Casey Ford, and Daniel Domme.
+<p><strong>Our History:</strong> </p><p>This shelter was started in 1997 by the founders: Carl Benson, Casey Ford, and Daniel Domme.
 Our love for animals started when we were all working for the Multnomah County Animal Control.  We decided that we wanted to 
 do better than the overtaxed Animal Control, and we wanted to provide more live outcomes to enhance our community.</p>
 <p><strong>Our Employees:</strong>
