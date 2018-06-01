@@ -60,8 +60,16 @@ mysqli_close($conn);
     </p>
 
     <p>
-        <label for="activityCode">Activity Code:</label>
-        <input type="text" class="required" name="activityCode" id="activityCode" required>
+        <label>Activity Code:</label>
+        <select name="activityCode" id="activityCode">
+            <option value="1">1: Shelter Intake</option>
+            <option value="2">2: Send to Foster</option>
+            <option value="3">3: Adopt Out</option>
+            <option value="4">4: Shelter Return</option>
+            <option value="5">5: Shelter Transfer</option>
+            <option value="6">6: Walk</option>
+            <option value="7">7: Play Time</option>
+        </select>
         </p>
         <p>
         <label for="activityDate">Date:</label>
