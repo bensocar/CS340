@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <?php
   session_start();
+  
+    if (!isset($_SESSION['loggedin'])) {
+        header("HTTP/1.0 403 Access Denied");
+        echo '<h1>403 Access Denied. </h1><p>You must log in to access this page.  You will be redirected to the homepage in five seconds.</p>';
+        echo "<script>setTimeout(function () {window.location.href= 'index.php';},5000);</script>";
+        exit;
+    }
+
   $currentpage = "Log Activity";
   include "pages.php";
 ?>
