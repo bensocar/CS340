@@ -48,7 +48,7 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		// $row is array... foreach( .. ) puts every element
 		// of $row to $cell variable
 		foreach($row as $cell)
-			echo "<td><a href=animalDetails.php?id=" . $animalID . ">$cell</a></td>";
+			echo "<td><a id='animalDetes' href=animalDetails.php?id=" . $animalID . ">$cell</a></td>";
 		echo "</tr>\n";
 	}
 	}

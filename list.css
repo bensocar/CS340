@@ -95,6 +95,15 @@ main {
 	margin-top: 10px;
 }
 
+#animalDetes {
+    text-decoration:none;
+    color: black;
+}
+
+#animalDetes:hover {
+  
+  color: orange;
+}
 .selector {
 	float: left;
 	margin: 10px;
