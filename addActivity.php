@@ -43,7 +43,7 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 			if(mysqli_query($conn, $query)){
 				$msg =  "Record added successfully.<p>";
 			} else{
-				echo "ERROR: Could not able to execute $query. " . mysqli_error($conn);
+				echo "ERROR: Not Able to add because " . mysqli_error($conn);
 			}
 		
 

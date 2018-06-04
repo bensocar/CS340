@@ -24,7 +24,7 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$searchVal = mysqli_real_escape_string($conn, $_POST['searchVal']);
 		$key = mysqli_real_escape_string($conn, $_POST['searchKey']);
 
-		$queryIn = "SELECT a.activityID as 'Activity ID', a.activityNotes as 'Notes', a.animalID as 'Animal ID', a.userName as 'Username', a.activityCode as 'Code', c.activityDesc as 'Description', a.activityDate as 'Date' FROM Activities a, ActivityCode c WHERE $key LIKE '%$searchVal%' AND a.activityCode = c.activityCode";
+		$queryIn = "SELECT a.activityID as 'Activity ID', a.activityNotes as 'Notes', a.animalID as 'Animal ID', a.userName as 'Username', a.activityCode as 'Code', c.activityDesc as 'Description', a.activityDate as 'Date' FROM Activities a, ActivityCode c WHERE $key LIKE '%$searchVal%' AND a.activityCode = c.activityCode ORDER BY a.activityDate DESC";
 		$resultIn = mysqli_query($conn, $queryIn);
 		if (!$resultIn) {
 		die("Query to show fields from table failed");
