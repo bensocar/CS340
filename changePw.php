@@ -28,64 +28,48 @@
 		die('could not connect: ' . msql_error());
 	}
 	
-    if($_SESSION['userType'] == 'V'){
+    
 		echo "<h2>Hello volunteer " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "</h2>";
-        echo "<p>Change phone number.</p>";
+        echo "<h3>You can change your password here.</h3>";
+        echo "<p>To change your password, please enter your old password, enter your desired new password, and then retype it to confirm it.</p>";
         $givenUsername = $_SESSION['loggedin'];
         
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $volPhone = mysqli_real_escape_string($conn, $_POST['phoneNumber']);
-            $queryInUser = "UPDATE Users1 SET phoneNumber='$volPhone' WHERE userName='$givenUsername'";
+            $oldPassWord = mysqli_real_escape_string($conn, $_POST['oldPassWord']);
+            $newPassWord = mysqli_real_escape_string($conn, $_POST['newPassWord']);
+            $checkNewPassWord = mysqli_real_escape_string($conn, $_POST['checkNewPassWord']);
+            
+            $queryInUser = "SELECT passWord FROM Users1 WHERE userName='$givenUsername'";
             $resultInUser = mysqli_query($conn, $queryInUser);
             if(!$resultInUser){
                 die("Could not complete query" . mysqli_error());
             }
-            else{
-                $_SESSION['phoneNumber'] = $volPhone;
-                echo "<script>location.href='account.php'</script>";
+            $userRow = mysqli_fetch_row($resultInUser);
+            if($oldPassWord != $userRow[0]){
+                echo "<h4>Incorrect old password. Try again.</h4>";
             }
+            else{
+                if($newPassWord != $checkNewPassWord){    
+                    echo "<h4>New password and retyped passwords do not match. Please reenter password information.</h4>";
+                }
+                else if($newPassWord == $oldPassWord){    
+                    echo "<h4>New password must be different from old password. Please reenter password information.</h4>";
+                }
+                else{
+                    $queryInUser = "UPDATE Users1 SET passWord='$newPassWord' WHERE userName='$givenUsername'";
+                    $resultInUser = mysqli_query($conn, $queryInUser);
+                    if(!$resultInUser){
+                        die("Could not complete query" . mysqli_error());
+                    }
+                    else{   
+                        echo '<h4><font color="green">Password successfully changed.</font></h4>';
+                        echo "<script>location.href='account.php'</script>";
+                    }
+                }
+            }         
+            
         }
-    }
-
-	if($_SESSION['userType'] == 'E'){
-		echo "<h2>Hello employee " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "</h2>";
-        echo "<p>Change any of the user information that you want.</p>";
-	
-		$givenUsername = $_SESSION['loggedin'];
-		$queryEmpInfo = "SELECT salary, position FROM EmployeeUser WHERE empUserName='$givenUsername'";
-		$resultEmpInfo = mysqli_query($conn, $queryEmpInfo);
-		if(!$resultEmpInfo){
-			die("Could not complete query" . mysqli_error());
-		}
-
-		$empUserRow = mysqli_fetch_row($resultEmpInfo);
-		$empSalary = $empUserRow[0];
-		$empPosition = $empUserRow[1];
-	
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-	$empSalary = mysqli_real_escape_string($conn, $_POST['salary']);
-	$empPosition = mysqli_real_escape_string($conn, $_POST['position']);
-    $empPhone = mysqli_real_escape_string($conn, $_POST['phoneNumber']);
-
-	
-    $queryInUser = "UPDATE Users1 SET phoneNumber='$empPhone' WHERE userName='$givenUsername'";
-	$resultInUser = mysqli_query($conn, $queryInUser);
-	if(!$resultInUser){
-		die("Could not complete query" . mysqli_error());
-	}
     
-    $queryInUser = "UPDATE EmployeeUser SET salary='$empSalary', position='$empPosition' WHERE empUserName='$givenUsername'";
-	$resultInUser = mysqli_query($conn, $queryInUser);
-    if(!$resultInUser){
-		die("Could not complete query" . mysqli_error());
-	}
-    
-    else{
-        $_SESSION['phoneNumber'] = $empPhone;
-        echo "<script>location.href='account.php'</script>";
-	}
-    }
-}
 	mysqli_close($conn);
 
 ?>
@@ -93,9 +77,17 @@
 <fieldset>
 	<legend>Change Password:</legend>
     <p>
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" maxlength="20" class="required" name="phoneNumber" id="phoneNumber" required value="<?php echo (isset($_SESSION['phoneNumber'])) ? $_SESSION['phoneNumber']: ''?>"></input>
+        <label for="oldPassWord">Old Password:</label>
+        <input type="password" maxlength="20" class="required" name="oldPassWord" id="oldPassWord" required ></input>
+    </p>  
+    <p>
+        <label for="newPassWord">New Password:</label>
+        <input type="password" maxlength="20" class="required" name="newPassWord" id="newPassWord" required ></input>
     </p>    
+    <p>
+        <label for="checkNewPassWord">Confirm New:</label>
+        <input type="password" maxlength="20" class="required" name="checkNewPassWord" id="checkNewPassWord" required ></input>
+    </p> 
 </fieldset>
 
       <p>
