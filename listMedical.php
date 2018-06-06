@@ -38,7 +38,7 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	}
 	echo "</tr>\n";
 	while($row = mysqli_fetch_row($resultIn)) {
-    $animalID = $row[2];
+    $animalID = $row[0];
 		echo "<tr>";
 		// $row is array... foreach( .. ) puts every element
 		// of $row to $cell variable
@@ -72,7 +72,7 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	}
 	echo "</tr>\n";
 	while($row = mysqli_fetch_row($resultIn)) {
-    $animalID = $row[4];
+    $animalID = $row[0];
 		echo "<tr>";
 		// $row is array... foreach( .. ) puts every element
 		// of $row to $cell variable

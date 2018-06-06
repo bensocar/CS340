@@ -37,7 +37,7 @@
 	}
 	echo "</tr>\n";
 	while($row = mysqli_fetch_row($resultIn)) {
-    $animalID = $row[2];
+    $animalID = $row[0];
 		echo "<tr>";
 		// $row is array... foreach( .. ) puts every element
 		// of $row to $cell variable
@@ -70,7 +70,7 @@
             }
             echo "</tr>\n";
             while($row = mysqli_fetch_row($resultIn)) {
-                $animalID = $row[2];
+                $animalID = $row[0];
                 echo "<tr>";
 		// $row is array... foreach( .. ) puts every element
 		// of $row to $cell variable
