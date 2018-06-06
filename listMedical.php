@@ -20,11 +20,39 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if (!$conn) {
 		die('Could not connect: ' . mysql_error());
 	}
+    
+    
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $queryIn = "SELECT m.animalID as 'Animal ID', a.animalName as 'Animal Name', m.recordID as 'Record ID', m.medicalNotes as 'Notes', m.medicalCode as 'Code', c.medicalDesc as 'Description', m.userName as 'Username', m.medicalDate as 'Date' FROM MedicalRecord m, MedicalCode c, Animals a WHERE m.medicalCode = c.medicalCode AND a.animalID=m.animalID ORDER BY m.medicalDate DESC";
+	$resultIn = mysqli_query($conn, $queryIn);
+		if (!$resultIn) {
+            die("Query to show fields from table failed");
+        }
+    $fields_num = mysqli_num_fields($resultIn);
+    echo "<table id='t01' border='1'><tr>";
+
+// printing table headers
+	for($i=0; $i<$fields_num; $i++) {
+		$field = mysqli_fetch_field($resultIn);
+		echo "<td><b>$field->name</b></td>";
+	}
+	echo "</tr>\n";
+	while($row = mysqli_fetch_row($resultIn)) {
+    $animalID = $row[2];
+		echo "<tr>";
+		// $row is array... foreach( .. ) puts every element
+		// of $row to $cell variable
+		foreach($row as $cell)
+			echo "<td><a id='animalDetes' href=animalDetails.php?id=" . $animalID . ">$cell</a></td>";
+		echo "</tr>\n";
+	}
+    }
+    
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$searchVal = mysqli_real_escape_string($conn, $_POST['searchVal']);
 		$key = mysqli_real_escape_string($conn, $_POST['searchKey']);
 
-		$queryIn = "SELECT m.recordID as 'Record ID', m.medicalNotes as 'Notes', m.medicalCode as 'Code', c.medicalDesc as 'Description', m.animalID as 'Animal ID', m.userName as 'Username', m.medicalDate as 'Date' FROM MedicalRecord as m, MedicalCode as c WHERE $key LIKE '%$searchVal%' AND m.medicalCode = c.medicalCode ORDER BY m.medicalDate DESC";
+		$queryIn = "SELECT m.animalID as 'Animal ID', a.animalName as 'Animal Name', m.recordID as 'Record ID', m.medicalNotes as 'Notes', m.medicalCode as 'Code', c.medicalDesc as 'Description', m.userName as 'Username', m.medicalDate as 'Date' FROM MedicalRecord m, MedicalCode c, Animals a WHERE m.$key LIKE '%$searchVal%' AND m.medicalCode = c.medicalCode AND a.animalID=m.animalID ORDER BY m.medicalDate DESC";
 		$resultIn = mysqli_query($conn, $queryIn);
 		if (!$resultIn) {
 		die("Query to show fields from table failed");

@@ -19,6 +19,33 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if (!$conn) {
 		die('Could not connect: ' . mysql_error());
 	}
+    
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $queryIn = "SELECT animalID as 'ID', animalName as 'Name', sex as 'Sex', birthdate as 'DOB', type as 'Animal Type', breed as 'Breed', color as 'Color' FROM Animals";
+	$resultIn = mysqli_query($conn, $queryIn);
+		if (!$resultIn) {
+            die("Query to show fields from table failed");
+        }
+    $fields_num = mysqli_num_fields($resultIn);
+    echo "<table id='t01' border='1'><tr>";
+
+// printing table headers
+	for($i=0; $i<$fields_num; $i++) {
+		$field = mysqli_fetch_field($resultIn);
+		echo "<td><b>$field->name</b></td>";
+	}
+	echo "</tr>\n";
+	while($row = mysqli_fetch_row($resultIn)) {
+    $animalID = $row[2];
+		echo "<tr>";
+		// $row is array... foreach( .. ) puts every element
+		// of $row to $cell variable
+		foreach($row as $cell)
+			echo "<td><a id='animalDetes' href=animalDetails.php?id=" . $animalID . ">$cell</a></td>";
+		echo "</tr>\n";
+	}
+    }
+    
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$searchVal = mysqli_real_escape_string($conn, $_POST['searchVal']);
 		$key = mysqli_real_escape_string($conn, $_POST['searchKey']);
