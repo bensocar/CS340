@@ -1,9 +1,9 @@
 <?php
   session_start();
   
-    if (!isset($_SESSION['loggedin'])) {
+    if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'E') {
         header("HTTP/1.0 403 Access Denied");
-        echo '<h1>403 Access Denied. </h1><p>You must log in to access this page.  You will be redirected to the homepage in five seconds.</p>';
+        echo '<h1>403 Access Denied. </h1><p>You must log in or be an employee user to access this page.  You will be redirected to the homepage in five seconds.</p>';
         echo "<script>setTimeout(function () {window.location.href= 'index.php';},5000);</script>";
         exit;
     }
