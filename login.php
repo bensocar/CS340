@@ -25,7 +25,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$givenUsername = mysqli_real_escape_string($conn, $_POST['givenUsername']);
 	$givenPassword = mysqli_real_escape_string($conn, $_POST['givenPassword']);
 
-	$queryInUser = "SELECT * FROM Users1 WHERE userName='$givenUsername' AND passWord='$givenPassword'";
+	$queryInUser = "SELECT * FROM Users1 WHERE userName='$givenUsername' AND passWord=md5('$givenPassword')";
+	echo "<script>console.log(md5('$givenPassword'))</script>";
 	$resultInUser = mysqli_query($conn, $queryInUser);
 
 	if(!$resultInUser){
@@ -54,6 +55,7 @@ mysqli_close($conn);
 
 <section>
 	<h1> <?php echo $msg; ?> </h1>
+	<p>Need an accout? <a href="addAccount.php"> Click Here</a>
 	<form method="post" id="loginForm">
 		<fieldset>
 			<p>
