@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$givenPassword = mysqli_real_escape_string($conn, $_POST['givenPassword']);
 
 	$queryInUser = "SELECT * FROM Users1 WHERE userName='$givenUsername' AND passWord=md5('$givenPassword')";
-	echo "<script>console.log(md5('$givenPassword'))</script>";
+
 	$resultInUser = mysqli_query($conn, $queryInUser);
 
 	if(!$resultInUser){
