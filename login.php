@@ -55,7 +55,7 @@ mysqli_close($conn);
 
 <section>
 	<h1> <?php echo $msg; ?> </h1>
-	<p>Need an accout? <a href="addAccount.php"> Click Here</a>
+	<p>Need an account? <a href="addAccount.php"> Click Here</a>
 	<form method="post" id="loginForm">
 		<fieldset>
 			<p>
