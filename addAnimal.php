@@ -39,9 +39,25 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         $userName = mysqli_real_escape_string($conn, $_POST['userName']);
         $activityNotes = mysqli_real_escape_string($conn, $_POST['activityNotes']);
         $activityDate = mysqli_real_escape_string($conn, $_POST['activityDate']);
-	
+
+
+		  $queryIn = "Select * FROM Users1 WHERE userName='$userName'";
+		  $resultIn = mysqli_query($conn, $queryIn);
+		  if(!$resultIn){
+			  die("Query to show fields from table failed");
+		  }
+		  $userRow = mysqli_fetch_row($resultIn);
+
+		  if(date("Y-m-d") < $birthdate){
+			  echo "Please enter a birthdate before the current time.";
+		  }
+
+		  else if($userRow == 0){
+			  echo "Please enter a valid username.";
+		  }
 // See if pid is already in the table
-		
+
+		  else{
 		// attempt insert query 
 			$query = "INSERT INTO Animals (animalName, sex, type, breed, color, birthdate) VALUES ('$animalName', '$sex', '$type', '$breed', '$color', '$birthdate')";
 			if(mysqli_query($conn, $query)){
@@ -49,14 +65,15 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 			} else{
 				echo "ERROR: Could not able to execute $query. " . mysqli_error($conn);
 			}
-            
+		  
             $queryIn = "SELECT animalID FROM Animals WHERE animalName='$animalName' and sex='$sex' and birthdate='$birthdate'";
 		$resultIn = mysqli_query($conn, $queryIn);
 		if (!$resultIn) {
 		die("Query to show fields from table failed");
 	}
     $animalRow = mysqli_fetch_row($resultIn);
-    $result = mysqli_query($conn, "CALL animalIntake('$animalRow[0]','$userName', '$activityNotes')") or die("Query fail: " . mysqli_error());
+		$result = mysqli_query($conn, "CALL animalIntake('$animalRow[0]','$userName', '$activityNotes')") or die("Query fail: " . mysqli_error());
+		  }
 }
 // close connection
 mysqli_close($conn);
