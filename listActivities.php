@@ -50,14 +50,25 @@
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$searchVal = mysqli_real_escape_string($conn, $_POST['searchVal']);
 		$key = mysqli_real_escape_string($conn, $_POST['searchKey']);
-		$queryIn = "SELECT a.animalID as 'Animal ID', m.animalName as 'Animal Name', a.activityID as 'Activity ID', a.activityNotes as 'Notes', a.userName as 'Username', a.activityCode as 'Code', c.activityDesc as 'Description', a.activityDate as 'Date' FROM Activities a, ActivityCode c, Animals m WHERE a.$key LIKE '%$searchVal%' AND a.activityCode = c.activityCode AND m.animalID=a.animalID ORDER BY a.activityDate DESC";
+
+		if(strcmp($key, "animalID") && strcmp($key, "activityID")){
+			$queryIn = "SELECT a.animalID as 'Animal ID', m.animalName as 'Animal Name', a.activityID as 'Activity ID', a.activityNotes as 'Notes', a.userName as 'Username', a.activityCode as 'Code', c.activityDesc as 'Description', a.activityDate as 'Date' FROM Activities a, ActivityCode c, Animals m WHERE a.$key LIKE '%$searchVal%' AND a.activityCode = c.activityCode AND m.animalID=a.animalID ORDER BY a.activityDate DESC";
+		}
+		else{
+			$queryIn = "SELECT a.animalID as 'Animal ID', m.animalName as 'Animal Name', a.activityID as 'Activity ID', a.activityNotes as 'Notes', a.userName as 'Username', a.activityCode as 'Code', c.activityDesc as 'Description', a.activityDate as 'Date' FROM Activities a, ActivityCode c, Animals m WHERE a.$key LIKE '$searchVal' AND a.activityCode = c.activityCode AND m.animalID=a.animalID ORDER BY a.activityDate DESC";
+		}
+
 		$resultIn = mysqli_query($conn, $queryIn);
 		if (!$resultIn) {
             die("Query to show fields from table failed");
         }
         $fields_num = mysqli_num_fields($resultIn);
         if(mysqli_num_rows($resultIn)==0){
-            echo "<p style=\"color:crimson;\"> No results for search \"$searchVal\"</p>";
+			  echo "<p style=\"color:crimson;\"> No results for search \"$searchVal\"</p>";
+			  if(!strcmp($key, "animalID") || !strcmp($key, "activityID")){
+
+			  echo "<p style=\"color:crimson;\"> Query '$key' requires exact match.</p>";
+	 			}
         }
         else{
 	//echo "<h1>Animal:</h1>";

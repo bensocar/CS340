@@ -50,14 +50,24 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$searchVal = mysqli_real_escape_string($conn, $_POST['searchVal']);
 		$key = mysqli_real_escape_string($conn, $_POST['searchKey']);
 
-		$queryIn = "SELECT animalID as 'ID', animalName as 'Name', sex as 'Sex', birthdate as 'DOB', type as 'Animal Type', breed as 'Breed', color as 'Color' FROM Animals WHERE $key LIKE '%$searchVal%'";
+		if(strcmp($key, "animalID") && strcmp($key, "sex")){
+			$queryIn = "SELECT animalID as 'ID', animalName as 'Name', sex as 'Sex', birthdate as 'DOB', type as 'Animal Type', breed as 'Breed', color as 'Color' FROM Animals WHERE $key LIKE '%$searchVal%'";
+		}
+		else{
+			$queryIn = "SELECT animalID as 'ID', animalName as 'Name', sex as 'Sex', birthdate as 'DOB', type as 'Animal Type', breed as 'Breed', color as 'Color' FROM Animals WHERE $key LIKE '$searchVal'";	
+		}
+
 		$resultIn = mysqli_query($conn, $queryIn);
 		if (!$resultIn) {
 		die("Query to show fields from table failed");
 	}
     $fields_num = mysqli_num_fields($resultIn);
     if(mysqli_num_rows($resultIn)==0){
-        echo "<p style=\"color:crimson;\"> No results for search \"$searchVal\"</p>";
+		 echo "<p style=\"color:crimson;\"> No results for search \"$searchVal\"</p>";
+		 
+		 if(!strcmp($key, "animalID") || !strcmp($key, "sex")){	 
+			 echo "<p style=\"color:crimson;\"> Query '$key' requires exact match.</p>";
+		 }
     }
     else{
 	//echo "<h1>Animal:</h1>";
