@@ -29,7 +29,7 @@
 	}
 
 
-		echo "<h2>Hello volunteer " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "</h2>";
+		echo "<h2>Hello user " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "</h2>";
     echo "<h3>You can change your password here.</h3>";
     echo "<p>To change your password, please enter your old password, enter your desired new password, and then retype it to confirm it.</p>";
     $givenUsername = $_SESSION['loggedin'];
